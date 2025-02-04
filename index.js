@@ -1,13 +1,16 @@
 import mongoose from "mongoose";
 import express from "express";
 import User from "./model.js";
+import dotenv from "dotenv";
 
 const app = express();
 app.use(express.json());
 
+dotenv.config();
+
 mongoose
   .connect(
-    "mongodb+srv://arbinkumar015:RvIPHt0T1i91WmMo@cluster0.cueru.mongodb.net/Backend-kalvi"
+    process.env.MONGO_URI,
   )
   .then(() => {
     console.log("Connected to MongoDB");
@@ -41,6 +44,6 @@ app.post("/user", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log("Server running on port 3000");
 });
